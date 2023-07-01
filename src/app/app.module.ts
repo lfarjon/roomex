@@ -6,12 +6,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { routes } from './app-routing.module';
 import { LayoutModule } from './shared/layout/layout.module';
+import { StoreModule } from '@ngrx/store';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
+    StoreModule.forRoot({}),
     LayoutModule,
   ],
   providers: [],

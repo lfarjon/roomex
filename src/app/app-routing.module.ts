@@ -10,7 +10,7 @@ export const routes: Route[] = [
   },
   {
     component: LayoutComponent,
-    path: 'thank-you',
+    path: 'thankyou',
     loadChildren: () =>
       import('./modules/public/thank-you/thank-you.module').then(
         (m) => m.ThankYouModule
