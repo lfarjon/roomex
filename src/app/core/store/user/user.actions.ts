@@ -5,3 +5,5 @@ export const submitUserData = createAction(
   '[User] Submit Data',
   props<{ userData: UserData }>()
 );
+
+export const rehydrateUserData = createAction('[User] Rehydrate');

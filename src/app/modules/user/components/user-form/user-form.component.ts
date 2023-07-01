@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
-  selector: 'app-enter-form',
-  templateUrl: './enter.component.html',
-  styleUrls: ['./enter.component.scss'],
+  selector: 'app-user-form',
+  templateUrl: './user-form.component.html',
+  styleUrls: ['./user-form.component.scss'],
 })
-export class EnterComponent implements OnInit {
+export class UserFormComponent implements OnInit {
   @Input() classes!: string;
   userForm: FormGroup;
 

@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ThankYouComponent } from './thank-you.component';
 import { RouterModule } from '@angular/router';
 import { thankYouRoutes } from './thank-you.routes';
-import { ThankYouComponentModule } from '../../user/components/thank-you/thank-you.module';
+import { ShowUserDataModule } from '../../user/components/show-user-data/show-user-data.module';
 
 @NgModule({
   declarations: [ThankYouComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(thankYouRoutes),
-    ThankYouComponentModule,
+    ShowUserDataModule,
   ],
 })
 export class ThankYouModule {}

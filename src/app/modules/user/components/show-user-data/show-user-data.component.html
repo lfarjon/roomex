@@ -1,0 +1,38 @@
+<div
+  class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-4"
+>
+  <div class="md:flex">
+    <div class="md:flex-shrink-0">
+      <img
+        class="h-48 w-full object-cover md:w-48"
+        src="/assets/user.jpg"
+        alt="User"
+      />
+    </div>
+    <div class="p-8">
+      <ng-container *ngIf="userData$ | async as userData">
+        <div
+          class="uppercase tracking-wide text-sm text-indigo-500 font-semibold"
+        >
+          User Details
+        </div>
+        <p class="mt-2 text-gray-500 name">
+          <strong>Name: </strong> {{ userData.name }}
+        </p>
+        <p class="mt-2 text-gray-500 username">
+          <strong>Username:</strong> {{ userData.username }}
+        </p>
+        <p class="mt-2 text-gray-500 country">
+          <strong>Country:</strong> {{ userData.country }}
+        </p>
+        <p class="mt-2 text-gray-500 postcode">
+          <strong>Postcode:</strong> {{ userData.postcode }}
+        </p>
+        <p class="mt-2 text-gray-500 favouriteMovie">
+          <strong>Favourite Movie:</strong>
+          {{ userData.favouriteMovie }}
+        </p>
+      </ng-container>
+    </div>
+  </div>
+</div>

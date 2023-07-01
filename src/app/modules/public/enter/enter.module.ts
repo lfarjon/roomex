@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { EnterComponent } from './enter.component';
 import { RouterModule } from '@angular/router';
 import { enterRoutes } from './enter.routes';
-import { EnterFormModule } from '../../user/components/enter/enter.module';
+import { UserFormModule } from '../../user/components/user-form/user-form.module';
 
 @NgModule({
   declarations: [EnterComponent],
-  imports: [CommonModule, RouterModule.forChild(enterRoutes), EnterFormModule],
+  imports: [CommonModule, RouterModule.forChild(enterRoutes), UserFormModule],
 })
 export class EnterModule {}
