@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./enter.component.scss'],
 })
 export class EnterComponent implements OnInit {
-  classes: string = 'flex flex-col justify-center items-center w-full';
+  classes: string = 'w-full max-w-xl p-5';
   constructor() {}
 
   ngOnInit(): void {}

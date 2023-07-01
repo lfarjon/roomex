@@ -1,27 +1,22 @@
-<div
-  class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-4"
->
-  <div class="md:flex">
-    <div class="md:flex-shrink-0">
-      <img
-        class="h-48 w-full object-cover md:w-48"
-        src="/assets/user.jpg"
-        alt="User"
-      />
-    </div>
-    <div class="p-8">
-      <ng-container *ngIf="userData$ | async as userData">
-        <div
-          class="uppercase tracking-wide text-sm text-indigo-500 font-semibold"
-        >
-          User Details
-        </div>
-        <p class="mt-2 text-gray-500 name">
-          <strong>Name: </strong> {{ userData.name }}
-        </p>
-        <p class="mt-2 text-gray-500 username">
-          <strong>Username:</strong> {{ userData.username }}
-        </p>
+<div class="h-screen w-full flex items-center justify-center">
+  <ng-container *ngIf="userData$ | async as userData">
+    <div
+      class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-5"
+    >
+      <div class="flex flex-col items-center pb-10">
+        <img
+          class="w-24 h-24 mb-3 rounded-full shadow-lg"
+          src="assets/user.jpg"
+          alt="User image"
+        />
+        <h5 class="name mb-1 text-xl font-medium text-gray-900 dark:text-white">
+          {{ userData.name }}
+        </h5>
+        <span class="text-sm text-gray-500 dark:text-gray-400 username">{{
+          userData.username
+        }}</span>
+      </div>
+      <div class="mt-5">
         <p class="mt-2 text-gray-500 country">
           <strong>Country:</strong> {{ userData.country }}
         </p>
@@ -32,7 +27,7 @@
           <strong>Favourite Movie:</strong>
           {{ userData.favouriteMovie }}
         </p>
-      </ng-container>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>

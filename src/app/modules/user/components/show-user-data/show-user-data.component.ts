@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
-import { UserData } from 'src/app/shared/models/user-data';
+import { UserData } from 'src/app/core/models/user-data';
 import { rehydrateUserData } from 'src/app/core/store/user/user.actions';
+import { selectUserData } from 'src/app/core/store/user/user.selectors';
 
 @Component({
   selector: 'app-show-user-data-component',
@@ -18,6 +19,10 @@ export class ShowUserDataComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(rehydrateUserData());
+    this.store.select(selectUserData).subscribe((userData) => {
+      if (!userData) {
+        this.store.dispatch(rehydrateUserData());
+      }
+    });
   }
 }

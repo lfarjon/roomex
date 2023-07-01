@@ -1,5 +1,5 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" [ngClass]="classes">
-  <mat-form-field>
+  <mat-form-field class="w-full" appearance="outline">
     <input matInput placeholder="Name" formControlName="name" required />
     <mat-error
       *ngIf="formControl('name')?.invalid && formControl('name')?.touched"
@@ -7,7 +7,7 @@
       Please enter a valid name.
     </mat-error>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field class="w-full" appearance="outline">
     <input matInput placeholder="Username" formControlName="username" />
     <mat-error
       *ngIf="
@@ -17,7 +17,7 @@
       Please enter a valid email.
     </mat-error>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field class="w-full" appearance="outline">
     <mat-select placeholder="Country" formControlName="country" required>
       <mat-option value="Ireland">Ireland</mat-option>
       <mat-option value="United Kingdom">United Kingdom</mat-option>
@@ -28,7 +28,7 @@
       Please select a country.
     </mat-error>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field class="w-full" appearance="outline">
     <input matInput placeholder="Post Code" formControlName="postcode" />
     <mat-error
       *ngIf="
@@ -38,11 +38,12 @@
       Please enter a valid postcode.
     </mat-error>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field class="w-full" appearance="outline">
     <input
       matInput
       placeholder="Favourite Movie"
       formControlName="favouriteMovie"
+      [matAutocomplete]="auto"
     />
     <mat-error
       *ngIf="
@@ -52,6 +53,18 @@
     >
       Please enter a valid movie.
     </mat-error>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="onMovieSelected($event)"
+    >
+      <mat-option
+        *ngFor="let movie of filteredMovies$ | async"
+        [value]="movie.Title"
+      >
+        {{ movie.Title }}
+      </mat-option>
+    </mat-autocomplete>
   </mat-form-field>
+
   <button type="submit" mat-raised-button color="primary">Submit</button>
 </form>

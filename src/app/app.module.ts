@@ -8,10 +8,12 @@ import { routes } from './app-routing.module';
 import { LayoutModule } from './shared/layout/layout.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     StoreModule.forRoot({}),

@@ -2,9 +2,10 @@ import { Route } from '@angular/router';
 import { LayoutComponent } from './shared/layout/layout.component';
 
 export const routes: Route[] = [
+  { path: '', redirectTo: 'enter', pathMatch: 'full' },
   {
     component: LayoutComponent,
-    path: '',
+    path: 'enter',
     loadChildren: () =>
       import('./modules/public/enter/enter.module').then((m) => m.EnterModule),
   },

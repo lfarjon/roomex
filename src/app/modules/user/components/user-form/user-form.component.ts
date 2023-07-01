@@ -7,7 +7,19 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Router } from '@angular/router';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  Observable,
+  of,
+  startWith,
+  switchMap,
+} from 'rxjs';
+import { Movie } from 'src/app/core/models/movie';
+import { MovieService } from 'src/app/core/services/movie.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -18,31 +30,53 @@ import { UserService } from 'src/app/core/services/user.service';
 export class UserFormComponent implements OnInit {
   @Input() classes!: string;
   userForm: FormGroup;
+  filteredMovies$: Observable<Movie[]>;
 
   constructor(
     private fb: FormBuilder,
+    private movieService: MovieService,
     private userService: UserService,
     private router: Router
   ) {
+    const favouriteMovieControl = this.fb.control('');
+
     this.userForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('^([^0-9]*)$')]],
       username: ['', [Validators.required, Validators.email]],
       country: ['', Validators.required],
       postcode: [''],
-      favouriteMovie: [''],
+      favouriteMovie: favouriteMovieControl,
     });
 
     this.formControl('postcode')?.setValidators(this.postcodeValidators());
     this.formControl('country')?.valueChanges.subscribe(() => {
       this.formControl('postcode')?.updateValueAndValidity();
     });
+
+    this.filteredMovies$ = favouriteMovieControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(300),
+      switchMap((value) => {
+        return this._filterMovies(value);
+      })
+    );
   }
 
   ngOnInit() {}
 
-  get formControl(): (control: string) => AbstractControl | null {
-    return (control: string): AbstractControl | null =>
-      this.userForm.get(control);
+  private _filterMovies(value: string): Observable<Movie[]> {
+    if (value.length < 2) {
+      return of([]);
+    }
+    return this.movieService.getSuggestedMovies(value);
+  }
+
+  onMovieSelected(event: MatAutocompleteSelectedEvent) {
+    this.formControl('favouriteMovie')?.setValue(event.option.value);
+  }
+
+  formControl(control: string): AbstractControl | null {
+    return this.userForm.get(control);
   }
 
   postcodeValidators(): ValidatorFn {
